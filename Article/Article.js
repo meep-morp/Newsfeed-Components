@@ -139,6 +139,7 @@ const articleMaker = (articleData) => {
   const paragraph2 = document.createElement("p");
   const paragraph3 = document.createElement("p");
   const expandButton = document.createElement("span");
+  const readButton = document.createElement("button");
 
   article.appendChild(articleTitle);
   article.appendChild(articleDate);
@@ -146,6 +147,7 @@ const articleMaker = (articleData) => {
   article.appendChild(paragraph2);
   article.appendChild(paragraph3);
   article.appendChild(expandButton);
+  article.appendChild(readButton);
 
   article.classList.add("article");
   articleDate.classList.add("date");
@@ -153,6 +155,7 @@ const articleMaker = (articleData) => {
   paragraph1.classList.add("p2");
   paragraph1.classList.add("p3");
   expandButton.classList.add("expandButton");
+  readButton.classList.add("readButton");
 
   articleTitle.textContent = title;
   articleDate.textContent = date;
@@ -163,6 +166,10 @@ const articleMaker = (articleData) => {
 
   expandButton.addEventListener("click", (event) => {
     article.classList.toggle("article-open");
+  });
+
+  readButton.addEventListener("click", (event) => {
+    articleDiv.removeChild(article);
   });
 
   return article;

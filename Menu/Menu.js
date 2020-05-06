@@ -38,31 +38,27 @@ let menuItems = [
 const hamburgerMaker = (navItems) => {
   const menu = document.createElement("div");
   const list = document.createElement("ul");
-  const items = document.createElement("li");
-  const menuBtn = document.querySelector("menu-button");
+  const menuBtn = document.querySelector(".menu-button");
 
     menu.appendChild(list);
-    items.forEach((item) => {
-      list.appendChild(item);
-  });
+
 
     menu.classList.add("menu");
 
-    items.forEach((item, index) => {
-    item.textContent = navItems[index];
-
-      menuBtn.addEventListener("click", (event) => {
-        menu.classList.toggle("menu--open");
-      })
-
-      return menu;
+    navItems.forEach((item) => {
+      const items = document.createElement("li");
+      items.textContent = item;
+      list.appendChild(items);
   });
+  
+  menuBtn.addEventListener("click", (event) => {
+    menu.classList.toggle("menu--open");
+  });
+  
+  return menu;
 }
 
-const header = document.querySelector("header");
+const header = document.querySelector(".header");
 
-menuItems.forEach((item) => {
-  const newMenu = hamburgerMaker(item);
-
+  const newMenu = hamburgerMaker(menuItems);
   header.appendChild(newMenu);
-});
