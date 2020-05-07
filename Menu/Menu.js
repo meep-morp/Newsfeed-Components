@@ -34,6 +34,7 @@ let menuItems = [
   
 */
 
+const header = document.querySelector(".header");
 
 const hamburgerMaker = (navItems) => {
   const menu = document.createElement("div");
@@ -51,14 +52,18 @@ const hamburgerMaker = (navItems) => {
       list.appendChild(items);
   });
   
+  header.addEventListener("click", (event) => {
+    if(menu.className === "menu--open") {
+      menu.classList.remove("menu--open");
+    }
+  });
+
   menuBtn.addEventListener("click", (event) => {
     menu.classList.toggle("menu--open");
   });
   
   return menu;
 }
-
-const header = document.querySelector(".header");
 
   const newMenu = hamburgerMaker(menuItems);
   header.appendChild(newMenu);

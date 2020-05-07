@@ -8,7 +8,7 @@
   border-radius: 10px;
   background-color: white;
   position: relative;
-  height: 50px;
+  max-height: 50px;
   overflow: hidden;
   box-shadow: 2px 2px 2px lightgrey;
 
@@ -42,9 +42,92 @@
 }
 
 .article-open {
-  height: 400px;
+  max-height: 700px;
+  transition: 0.5s ease;
 }
 
+.readButton {
+  background-color: rgb(197, 96, 113);
+  color: white;
+  font-weight: 400;
+  border: none;
+  padding: 10px;
+}
 
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 70px;
 
+  p {
+    font-size: 20px;
+  }
+
+  #titleArt {
+    background-color: rgb(76, 158, 76);
+    width: 50%;
+    height: 40px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    &:hover {
+      background-color: rgb(161, 236, 126);
+      color: black;
+      transition: ease 0.3s;
+    }
+
+    &:focus {
+      background-color: rgb(161, 236, 126);
+      color: black;
+      transition: ease 0.3s;
+    }
+  }
+
+  #bodyText {
+    width: 70%;
+    background-color: rgb(76, 158, 76);
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1.6px;
+    line-height: 23px;
+    
+    &:hover {
+      background-color: rgb(161, 236, 126);
+      color: black;
+      transition: ease 0.3s;
+    }
+
+    &:focus {
+      background-color: rgb(161, 236, 126);
+      color: black;
+      transition: ease 0.3s;
+    }
+  }
+
+  #subBtn {
+    width: 20%;
+    height: 40px;
+    margin-top: 10px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    border: white solid 3px;
+    letter-spacing: 1px;
+    font-size: 16px;
+
+    &:hover {
+      background-color: rgb(161, 236, 126);
+      color: black;
+      transition: ease 0.3s;
+    }
+  }
+}
 

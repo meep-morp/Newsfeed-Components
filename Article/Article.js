@@ -163,6 +163,7 @@ const articleMaker = (articleData) => {
   paragraph2.textContent = secondParagraph;
   paragraph3.textContent = thirdParagraph;
   expandButton.textContent = "\u25bc";
+  readButton.textContent = "Mark as Read"
 
   expandButton.addEventListener("click", (event) => {
     article.classList.toggle("article-open");
@@ -180,4 +181,25 @@ const articleDiv = document.querySelector(".articles");
 data.forEach((dataObj) => {
   const newArticle = articleMaker(dataObj);
   articleDiv.appendChild(newArticle);
+});
+
+// Write Article
+
+const form = document.querySelector(".form");
+const currentDate = new Date();
+
+// I got this from Stack Overlow when researching how to format the date
+// -->
+
+const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(currentDate);
+const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(currentDate);
+const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(currentDate);
+const submit = document.querySelector("#subBtn");
+
+submit.addEventListener("click", (event) => {
+  const titleInput = document.querySelector("#titleArt").value;
+  const bodyInput = document.querySelector("#bodyText").value;
+  data.push({"title": titleInput, "date": `${mo} ${da}, ${ye}`, "firstParagraph": bodyInput});
+  const input = articleMaker(data[data.length - 1]);
+  articleDiv.appendChild(input);
 });
