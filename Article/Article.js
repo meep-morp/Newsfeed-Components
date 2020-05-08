@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'No, I am your father.',
+    date: 'May 21st, 1980',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -112,3 +128,78 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articleMaker = (articleData) => {
+  const {title, date, firstParagraph, secondParagraph, thirdParagraph} = articleData;
+
+  const article = document.createElement("div");
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  const paragraph1 = document.createElement("p");
+  const paragraph2 = document.createElement("p");
+  const paragraph3 = document.createElement("p");
+  const expandButton = document.createElement("span");
+  const readButton = document.createElement("button");
+
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(paragraph1);
+  article.appendChild(paragraph2);
+  article.appendChild(paragraph3);
+  article.appendChild(expandButton);
+  article.appendChild(readButton);
+
+  article.classList.add("article");
+  articleDate.classList.add("date");
+  paragraph1.classList.add("p1");
+  paragraph1.classList.add("p2");
+  paragraph1.classList.add("p3");
+  expandButton.classList.add("expandButton");
+  readButton.classList.add("readButton");
+
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  paragraph1.textContent = firstParagraph;
+  paragraph2.textContent = secondParagraph;
+  paragraph3.textContent = thirdParagraph;
+  expandButton.textContent = "\u25bc";
+  readButton.textContent = "Mark as Read"
+
+  expandButton.addEventListener("click", (event) => {
+    article.classList.toggle("article-open");
+  });
+
+  readButton.addEventListener("click", (event) => {
+    articleDiv.removeChild(article);
+  });
+
+  return article;
+}
+
+const articleDiv = document.querySelector(".articles");
+
+data.forEach((dataObj) => {
+  const newArticle = articleMaker(dataObj);
+  articleDiv.appendChild(newArticle);
+});
+
+// Write Article
+
+const form = document.querySelector(".form");
+const currentDate = new Date();
+
+// I got this from Stack Overlow when researching how to format the date
+// -->
+
+const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(currentDate);
+const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(currentDate);
+const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(currentDate);
+const submit = document.querySelector("#subBtn");
+
+submit.addEventListener("click", (event) => {
+  const titleInput = document.querySelector("#titleArt").value;
+  const bodyInput = document.querySelector("#bodyText").value;
+  data.push({"title": titleInput, "date": `${mo} ${da}, ${ye}`, "firstParagraph": bodyInput});
+  const input = articleMaker(data[data.length - 1]);
+  articleDiv.appendChild(input);
+});
